@@ -4,6 +4,9 @@
   var mouseState, mouseFrmLen = 10, mousePress = false;
   var sprites = [];
   var score = 0;
+  var hitNum = 0;
+  var missNum = 0;
+  var comboNum = 0;
   
   var Sprite = function(w, h, x, y, state, image){
       var self = this;
@@ -55,11 +58,12 @@
      
       //绘制得分
     
-      ctx.font = "18px 微软雅黑"
+      ctx.font = "14px Courier"
       ctx.fillStyle = "#000000";
-      ctx.fillText("超能美白队",10,20);
-      ctx.fillStyle = "#000000";
-      ctx.fillText("得分:"+score,10,60);
+      ctx.fillText("Score : "+score,300,350);
+      ctx.fillText("hit   : "+hitNum,10,20);
+      ctx.fillText("miss  : "+missNum,10,40);
+      ctx.fillText("combo : "+comboNum,10,60);
      
       for(i=0;i<10;i++){
           for(j=0; j<10; j++){
@@ -90,25 +94,30 @@
  
   function hammerMove(e){
       if(hammer){
-          hammer.x = event.x-40;
-          hammer.y = event.y-40;
+          hammer.x = event.x - 18;
+          hammer.y = event.y - 44;
       }
   }
  
   function hit(x, y){
-     
+      var hitFlag = 0;
       for(i=0;i<10;i++){
           for(j=0;j<10;j++){
               var s = sprites[i][j];
              
               if(s.state=='show'){
-                  if(x>s.x+30 && y>s.y && x<(s.x+s.w+30) && y<(s.y+s.h)){
+                  if(s.x < x && x < s.x+s.w*2 && s.y < y && y < s.y+s.h*2){
                       score++;
                       s.state = 'hide';
+                      hitFlag = 1;
                   }
               }
           }
       }
+      if (!hitFlag)
+          missNum++;
+      else
+          hitNum++;
   }
  
   function init(){
@@ -124,7 +133,7 @@
       var hamImg = new Image();
       hamImg.src = 'hammer.png';
       hamImg.onload = function(){
-          hammer = new HammerSprite(48, 48, 100, 100, hamImg);
+          hammer = new HammerSprite(36, 44, 100, 100, hamImg);
       }
      
       var msImg = new Image();
@@ -146,13 +155,13 @@
   };
  
   function hammerDown(){
+      brushPos.innerHTML='brushPos : <'+event.x+' , '+event.y+'>';
       mousePress = true;
+      hit(event.x, event.y);
   }
  
   function hammerUp(){
-      brushPos.innerHTML='brushPos : <'+event.x+' , '+event.y+'>';
       mousePress = false;
-      hit(event.x, event.y);
   }
  
   function hideCursor(obj){
