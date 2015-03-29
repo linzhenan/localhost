@@ -22,7 +22,7 @@
               ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
               setTimeout(function(){
                   self.state = 'hide';
-              },3000);
+              },1000);
           }
       }
   }
@@ -65,8 +65,8 @@
       ctx.fillText("miss  : "+missNum,10,40);
       ctx.fillText("combo : "+comboNum,10,60);
      
-      for(i=0;i<10;i++){
-          for(j=0; j<10; j++){
+      for(i=0;i<100;i++){
+          for(j=0; j<100; j++){
               sprites[i][j].draw();
           }
       }
@@ -84,8 +84,8 @@
           }
       }
      
-      var a = Math.round(Math.random()*100)%3;
-      var b = Math.round(Math.random()*100)%3;
+      var a = Math.round(Math.random()*100);
+      var b = Math.round(Math.random()*100);
 	  var s = sprites[a][b];
       s.state='show';
 	  pimplePos.innerHTML='pimplePos : <'+s.x+' , '+s.y+'>';
@@ -101,8 +101,8 @@
  
   function hit(x, y){
       var hitFlag = 0;
-      for(i=0;i<10;i++){
-          for(j=0;j<10;j++){
+      for(i=0;i<100;i++){
+          for(j=0;j<100;j++){
               var s = sprites[i][j];
              
               if(s.state=='show'){
@@ -140,10 +140,10 @@
       msImg.src = 'mouse.png';
      
       msImg.onload = function(){
-          for(i=0;i<10;i++){
+          for(i=0;i<100;i++){
               var arr = [];
-              for(j=0; j<10; j++){
-                  var s = new Sprite(18, 18, 80+15*i, 80+15*j, 'hide', msImg);
+              for(j=0; j<100; j++){
+                  var s = new Sprite(18, 18, 80+3*i, 80+2*j, 'hide', msImg);
                   arr[j] = s;
               }
               sprites[i] = arr;
@@ -151,7 +151,7 @@
       }
      
       setInterval(drawScreen, 30);
-      setInterval(updateLogic, 3000);
+      setInterval(updateLogic, 1000);
   };
  
   function hammerDown(){
