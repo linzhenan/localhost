@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+     <html lang="en" >
+         <head>
+             <meta charset="utf-8" />
+             <title>超能美白队</title>
+             <script type="text/javascript" src="game.js"></script>
+         </head>
+         <body onload="init()">
+             <div class="container">
+                 <canvas onmouseover="hideCursor(this)" onmouseout="showCursor"
+                         onmousemove="hammerMove(this);"
+                         onmousedown="hammerDown();" onmouseUp="hammerUp();"
+                         id="screen" width="700" height="500" style="border:1px solid #000"></canvas>
+             </div>
+             <div id="info">Copyright (c) 2015 何以青春（欧莱雅校园义卖团队）</div>
+         </body>
+     </html>
