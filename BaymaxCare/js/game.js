@@ -1,9 +1,10 @@
-var canvas, ctx, info;
+  var canvas, ctx, brushPos, pimplePos;
   var bg;
   var hammer, hamX, hamY;
   var mouseState, mouseFrmLen = 10, mousePress = false;
-  var sprites = [], holes = [];
+  var sprites = [];
   var score = 0;
+  
   var Sprite = function(w, h, x, y, state, image){
       var self = this;
       this.w = w;
@@ -19,22 +20,6 @@ var canvas, ctx, info;
               setTimeout(function(){
                   self.state = 'hide';
               },3000);
-          }
-      }
-  }
- 
-  var HoleSprite = function(w, h, x, y, state, image){
-      var self = this;
-      this.w = w;
-      this.h = h;
-      this.x = x;
-      this.y = y;
-      this.image = image;
-      this.state = state;
-     
-      this.draw = function(){
-          if(this.state == 'show'){
-              ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
           }
       }
   }
@@ -62,7 +47,6 @@ var canvas, ctx, info;
   }
  
   function clearScreen(){
-      //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.drawImage(bg, 0, 0, ctx.canvas.width, ctx.canvas.height);
   }
  
@@ -71,23 +55,14 @@ var canvas, ctx, info;
      
       //绘制得分
     
-      ctx.font = "40px serif"
-      ctx.strokeStyle = "#FF00ff";
-      ctx.strokeText ("超能美白队", 50,50);
+      ctx.font = "18px 微软雅黑"
       ctx.fillStyle = "#000000";
-      ctx.fillText("超能美白队",50,50);
- 
-      ctx.fillStyle = "#ff0000";
-      ctx.fillText("你的得分:"+score,450,50);
-      for(i=0;i<3;i++){
-          for(j=0; j<3; j++){
-              holes[i][j].draw();
-          }
-      }
+      ctx.fillText("超能美白队",10,20);
+      ctx.fillStyle = "#000000";
+      ctx.fillText("得分:"+score,10,60);
      
- 
-      for(i=0;i<3;i++){
-          for(j=0; j<3; j++){
+      for(i=0;i<10;i++){
+          for(j=0; j<10; j++){
               sprites[i][j].draw();
           }
       }
@@ -99,15 +74,17 @@ var canvas, ctx, info;
  
   function updateLogic(){
  
-      for(i=0;i<3;i++){
-          for(j=0; j<3; j++){
+      for(i=0;i<10;i++){
+          for(j=0; j<10; j++){
               sprites[i][j].state=='hide'
           }
       }
      
       var a = Math.round(Math.random()*100)%3;
       var b = Math.round(Math.random()*100)%3;
-      sprites[a][b].state='show';
+	  var s = sprites[a][b];
+      s.state='show';
+	  pimplePos.innerHTML='pimplePos : <'+s.x+' , '+s.y+'>';
   }
  
  
@@ -120,8 +97,8 @@ var canvas, ctx, info;
  
   function hit(x, y){
      
-      for(i=0;i<3;i++){
-          for(j=0;j<3;j++){
+      for(i=0;i<10;i++){
+          for(j=0;j<10;j++){
               var s = sprites[i][j];
              
               if(s.state=='show'){
@@ -135,15 +112,9 @@ var canvas, ctx, info;
   }
  
   function init(){
-      info = document.getElementById('info');
-	  canvas = document.getElementById('screen');
-      if (typeof window.G_vmlCanvasManager!="undefined") { 
-        canvas = window.G_vmlCanvasManager.initElement(canvas);
-        ctx=canvas.getContext("2d");
-      }
-	  else {
-        ctx=canvas.getContext("2d");
-      }
+      brushPos = document.getElementById('brushPos');
+	  pimplePos = document.getElementById('pimplePos');
+      canvas = document.getElementById('screen');
       ctx = canvas.getContext('2d');
      
       bg = new Image();
@@ -160,32 +131,18 @@ var canvas, ctx, info;
       msImg.src = 'mouse.png';
      
       msImg.onload = function(){
-          for(i=0;i<3;i++){
+          for(i=0;i<10;i++){
               var arr = [];
-              for(j=0; j<3; j++){
-                  var s = new Sprite(60, 70, 50+240*i, 80+120*j, 'hide', msImg);
+              for(j=0; j<10; j++){
+                  var s = new Sprite(18, 18, 80+15*i, 80+15*j, 'hide', msImg);
                   arr[j] = s;
               }
               sprites[i] = arr;
           }     
       }
      
-      var holeImg = new Image();
-      holeImg.src = 'hole.png';
-      holeImg.onload = function(){
-          for(i=0;i<3;i++){
-              var arr = [];
-              for(j=0; j<3; j++){
-                  var s = new HoleSprite(80, 30, 40+240*i, 140+120*j, 'show', holeImg);
-                  arr[j] = s;
-              }
-              holes[i] = arr;
-          }     
-      }
-     
       setInterval(drawScreen, 30);
       setInterval(updateLogic, 3000);
-     
   };
  
   function hammerDown(){
@@ -193,8 +150,7 @@ var canvas, ctx, info;
   }
  
   function hammerUp(){
- 
-      info.innerHTML=event.x+':'+event.y;
+      brushPos.innerHTML='brushPos : <'+event.x+' , '+event.y+'>';
       mousePress = false;
       hit(event.x, event.y);
   }

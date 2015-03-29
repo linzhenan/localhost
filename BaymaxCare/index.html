@@ -1,17 +1,45 @@
-<!DOCTYPE html>
-     <html lang="en" >
-         <head>
-             <meta charset="utf-8" />
-             <title>超能美白队</title>
-             <script type="text/javascript" src="game.js"></script>
-         </head>
-         <body onload="init()">
-             <div class="container">
-                 <canvas onmouseover="hideCursor(this)" onmouseout="showCursor"
-                         onmousemove="hammerMove(this);"
-                         onmousedown="hammerDown();" onmouseUp="hammerUp();"
-                         id="screen" width="700" height="500" style="border:1px solid #000"></canvas>
-             </div>
-             <div id="info">Copyright (c) 2015 何以青春（欧莱雅校园义卖团队）</div>
-         </body>
-     </html>
+<!DOCTYPE HTML> 
+<!--[if IE 7]>
+<script type='text/javascript' src='js/excanvas.js'></script>
+<link rel="stylesheet" href="css/iefix.css" type="text/css" media="screen" />
+<![endif]-->
+<!--[if IE 8]>
+<script type='text/javascript' src='js/excanvas.js'></script>
+<link rel="stylesheet" href="css/iefix.css" type="text/css" media="screen" />
+<![endif]--> 
+
+<!--[if (gte IE 6)&(lte IE 8)]>
+    <script type="text/javascript" src="js/selectivizr.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+	<script src="js/html5shiv-printshiv.js"></script>
+<![endif]-->
+
+<!--[if lte IE 8]> 
+<noscript>
+     <style>.html5-wrappers{display:none!important;}</style>
+     <div class="ie-noscript-warning">您的浏览器禁用了脚本，请启用脚本以正常访问。</a>.
+     </div>
+</noscript>
+<![endif]-->
+
+ <html lang="en" >
+	 <head>
+		 <meta charset="utf-8" />
+		 <title>超能美白队</title>
+		 <script type="text/javascript" src="js/game.js"></script>
+	 </head>
+	 <body onload="init()">
+		 <div class="container">
+			 <canvas onmouseover="hideCursor(this)" onmouseout="showCursor"
+					 onmousemove="hammerMove(this);"
+					 onmousedown="hammerDown();" onmouseUp="hammerUp();"
+					 id="screen" width="413" height="371" style="border:1px solid #000"></canvas>
+		 </div>
+		 <div id="brushPos">brushPos : <X , Y></div>
+		 <div id="pimplePos">pimplePos : <X , Y></div>
+		 <div id="copyright">Copyright(c)2015 何以青春(北京大学欧莱雅义卖团队)</div>
+	 </body>
+ </html>
