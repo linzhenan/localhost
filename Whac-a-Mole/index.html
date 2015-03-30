@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+     <html lang="en" >
+         <head>
+             <meta charset="utf-8" />
+             <title>打地鼠</title>
+             <script type="text/javascript" src="js/game.js"></script>
+         </head>
+         <body onload="init()">
+             <div class="container">
+                 <canvas onmouseover="hideCursor(this)" onmouseout="showCursor"
+                         onmousemove="hammerMove(this);"
+                         onmousedown="hammerDown();" onmouseUp="hammerUp();"
+                         id="screen" width="700" height="500" style="border:1px solid #000"></canvas>
+             </div>
+            
+             <div id="info"></div>
+         </body>
+     </html>
+  
+  
