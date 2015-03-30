@@ -2,10 +2,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>大白护肤顾问·问题3</title>
+<title>大白护肤顾问</title>
 </head>
 
 <body>
-大家好，我是大白，您的私人护肤顾问。现在我对你进行全身扫描：问题3
+<form id="form1" name="form1" method="post" action="">
+<script type="text/javascript">
+	<!--
+	function nextUrl(){
+		var item1 = document.getElementById("item1").checked;
+		var item2 = document.getElementById("item2").checked;
+		if (item1)
+		{
+		window.location.href = "result3.html"; 
+		}
+		if (item2)
+		{
+		window.location.href = "result4.html"
+		}
+	}
+	-->
+</script>
+<table width="1280" height="720" border="0" bgcolor="#000000">
+  <tr>
+    <td height="80" colspan="2">
+      <div align="center"><font color="#FFFFFF" size="3" face="Microsoft YaHei UI">您好，我是大白，您的私人护肤顾问。我正在对您进行全身扫描：</font></div>
+    </td>
+  </tr>
+  <tr>
+    <td height="550"><div align="center"><img src="pic/baymax3.jpg" width="512" height="432" /></div></td>
+    <td height="550">
+      <div>
+      <p><font color="#FFFFFF" size="3" face="Microsoft YaHei UI">夏天否涂抹防晒霜：</font></p>
+      <p>
+        <input type="radio" name="radio" id="item1" value="item1" />
+        <font color="#FFFFFF" size="3" face="Microsoft YaHei UI">是</font></p>
+      <p>
+        <input type="radio" name="radio" id="item2" value="item2" />
+        <font color="#FFFFFF" size="3" face="Microsoft YaHei UI">否</font>
+      </p>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td width="700">&nbsp;</td>
+    <td><div align="center"><a href="javascript:void(0);" onclick="nextUrl();"><img src="pic/next.png" width="168" height="48" /></a></div></td>
+  </tr>
+</table>
+</form>
 </body>
 </html>
